@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main() {
+    // Solicitar números
+    int inteiro;
+    float flutuante;
+    printf("Digite um número inteiro: ");
+    scanf("%d", &inteiro);
+    printf("Digite um número flutuante: ");
+    scanf("%f", &flutuante);
+
+    // Operações aritméticas
+    printf("Soma: %.2f\n", inteiro + flutuante);
+    printf("Subtração: %.2f\n", inteiro - flutuante);
+    printf("Multiplicação: %.2f\n", inteiro * flutuante);
+    if (flutuante != 0) {
+        printf("Divisão: %.2f\n", inteiro / flutuante);
+    } else {
+        printf("Divisão por zero não permitida.\n");
+    }
+
+    // Divisão truncada e potência
+    printf("Divisão truncada: %d\n", inteiro / (int)flutuante);
+    printf("Potência (inteiro elevado ao flutuante): %.2f\n", pow(inteiro, flutuante));
+
+    // Solicitar frase
+    getchar(); // Limpar buffer de entrada
+    char frase[200];
+    printf("Digite uma frase: ");
+    fgets(frase, sizeof(frase), stdin);
+
+    // Contar palavras na frase
+    int palavras = 0;
+    char *token = strtok(frase, " \n");
+    while (token != NULL) {
+        palavras++;
+        token = strtok(NULL, " \n");
+    }
+    printf("Número de palavras na frase: %d\n", palavras);
+
+    // Converter para maiúsculas
+    for (int i = 0; frase[i]; i++) {
+        frase[i] = toupper(frase[i]);
+    }
+    printf("Frase em maiúsculas: %s", frase);
+
+    // Substituir palavra
+    char palavra_antiga[50], palavra_nova[50];
+    printf("Digite a palavra a ser substituída: ");
+    scanf("%s", palavra_antiga);
+    printf("Digite a nova palavra: ");
+    scanf("%s", palavra_nova);
+
+    char *pos = strstr(frase, palavra_antiga);
+    while (pos != NULL) {
+        strncpy(pos, palavra_nova, strlen(palavra_nova));
+        pos = strstr(pos + strlen(palavra_nova), palavra_antiga);
+    }
+    printf("Frase após substituição: %s", frase);
+
+    // Lista de números de 1 a 10
+    int lista[10];
+    for (int i = 0; i < 10; i++) {
+        lista[i] = i + 1;
+    }
+
+    // Solicitar número para adicionar à lista
+    int num_adicionar;
+    printf("Digite um número para adicionar à lista: ");
+    scanf("%d", &num_adicionar);
+    lista[10] = num_adicionar; // Adicionando à lista
+
+    // Remover primeiro e último elemento
+    for (int i = 1; i < 9; i++) {
+        printf("%d ", lista[i]);
+    }
+    printf("\n");
+
+    // Dicionário de frutas
+    char frutas[5][20] = {"Maçã", "Banana", "Laranja", "Uva", "Pera"};
+    float precos[5] = {3.5, 2.0, 4.0, 5.5, 3.0};
+
+    // Adicionar nova fruta
+    char nova_fruta[20];
+    float novo_preco;
+    printf("Digite o nome de uma nova fruta: ");
+    scanf("%s", nova_fruta);
+    printf("Digite o preço dessa fruta: ");
+    scanf("%f", &novo_preco);
+
+    // Exibir frutas e preços
+    for (int i = 0; i < 5; i++) {
+        printf("%s: %.2f\n", frutas[i], precos[i]);
+    }
+    printf("%s: %.2f\n", nova_fruta, novo_preco);
+
+    return 0;
+}
